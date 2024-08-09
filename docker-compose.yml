@@ -8,7 +8,7 @@ volumes:
     driver: local
 services:
   spring:
-    image: yaswanthreddy1007/database1:4
+    image: yaswanthreddy1007/dockercompose:TAG
     depends_on:
     - mongo
     environment:
