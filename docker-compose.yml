@@ -29,6 +29,6 @@ networks:
   yaswanth:
     driver: overlay
 
-volume:
+volumes:
   gagana:
     driver: local
