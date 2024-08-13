@@ -29,3 +29,38 @@ services:
     - gova
     volumes: 
     - gova:/data/db
+
+    version: "4.1"
+services:
+  spring:
+    image: yaswanthreddy1007/docker-swarm:TAG
+    ports:
+    - 8080:8080
+    environment:
+    - MONGO_DB_HOSTNAME=mongo
+    - MONGO_DB_USERNAME=yaswanth
+    - MONGO_DB_PASSWORD=yaswanth968
+    networks:
+    - yaswanth
+    deploy:
+      replicas: 2
+      update_config:
+        parallelsim: 1
+        delay: 20s
+  mongo:
+    image: mango
+    environments:
+    - MONGO_INITDB_ROOT_USERNAME=yaswanth
+    - MONGO_INITDB_ROOT_PASSWORD=yaswanth968
+    networks:
+    - yaswanth
+    volumes:
+    - gagana:data/db
+
+networks:
+  yaswanth:
+  driver: overlay
+
+volume:
+  gagana:
+  driver: local
