@@ -27,8 +27,8 @@ services:
 
 networks:
   yaswanth:
-  driver: overlay
+    driver: overlay
 
 volume:
   gagana:
-  driver: local
+    driver: local
