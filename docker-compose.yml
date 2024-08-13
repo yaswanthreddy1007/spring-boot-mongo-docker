@@ -23,7 +23,7 @@ services:
     networks:
     - yaswanth
     volumes:
-    - gagana:data/db
+    - gagana:/data/db
 
 networks:
   yaswanth:
