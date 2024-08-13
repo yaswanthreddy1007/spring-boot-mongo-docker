@@ -1,36 +1,4 @@
-version: "3"
-
-networks:
-  gova:
-    driver: bridge
-volumes:
-  gova:
-    driver: local
-services:
-  spring:
-    image: yaswanthreddy1007/dockercompose:TAG
-    depends_on:
-    - mongo
-    environment:
-    - MONGO_DB_HOSTNAME=mongo
-    - MONGO_DB_USERNAME=yaswanth
-    - MONGO_DB_PASSWORD=yaswanth968
-    ports: 
-    - 9000:8080
-    networks: 
-    - gova
-
-  mongo:
-    image: mongo
-    environment:
-    - MONGO_INITDB_ROOT_USERNAME=yaswanth
-    - MONGO_INITDB_ROOT_PASSWORD=yaswanth968
-    networks:  
-    - gova
-    volumes: 
-    - gova:/data/db
-
-    version: "4.1"
+version: "4.1"
 services:
   spring:
     image: yaswanthreddy1007/docker-swarm:TAG
