@@ -17,7 +17,7 @@ services:
         delay: 20s
   mongo:
     image: mango
-    environments:
+    environment:
     - MONGO_INITDB_ROOT_USERNAME=yaswanth
     - MONGO_INITDB_ROOT_PASSWORD=yaswanth968
     networks:
