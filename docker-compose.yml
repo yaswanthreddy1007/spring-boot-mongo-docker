@@ -16,7 +16,7 @@ services:
         parallelism: 1
         delay: 20s
   mongo:
-    image: mango
+    image: mongo
     environment:
     - MONGO_INITDB_ROOT_USERNAME=yaswanth
     - MONGO_INITDB_ROOT_PASSWORD=yaswanth968
