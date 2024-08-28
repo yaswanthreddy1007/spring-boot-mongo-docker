@@ -1,0 +1,74 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: springdeployment
+  namespace: test-ns
+spec:
+  selector:
+    matchLabels:
+      team: production
+  template:
+    metadata:
+      labels:
+        team: production
+    spec:
+      containers:
+      - name: springcontainer
+        image: yaswanthreddy1007/kubernetes:TAG
+        env:
+        - name: MONGO_DB_HOSTNAME
+          value: mongosvc
+        - name: MONGO_DB_USERNAME
+          value: yaswanth
+        - name: MONGO_DB_PASSWORD
+          value: yaswanth968
+        resources:
+          requests:
+            cpu: "100m"
+            memory: "252Mi"
+          limits:
+            memory: "500Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 8080
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: springsvc
+  namespace: test-ns
+spec:
+  type: NodePort
+  selector:
+    team: production
+  ports:
+  - port: 80
+    targetPort: 8080
+    nodePort: 31000
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: hpaspring
+  namespace: test-ns
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: springdeployment
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 50
